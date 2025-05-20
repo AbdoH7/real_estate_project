@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ./real-estate-api
+      dockerfile: Dockerfile
+      args:
+        APP_USER_ID: ${APP_USER_ID}
+    container_name: ${API_CONTAINER_NAME}
+    ports:
+      - "${API_PORT}:3000"
+    volumes:
+      - ./real-estate-api:/home/node/app
+      - /home/node/app/node_modules
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:${POSTGRES_VERSION}
+    container_name: ${DB_CONTAINER_NAME}
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:

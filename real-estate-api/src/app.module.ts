@@ -5,6 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import typeorm from './config/typeorm'
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { DeveloperModule } from './developer/developer.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
       return config;
     },
   }),
+    DeveloperModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],

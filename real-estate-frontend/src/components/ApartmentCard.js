@@ -16,7 +16,7 @@ import Link from 'next/link';
 
 export default function ApartmentCard({ apartment }) {
   return (
-    <Link href={`/apartments/${apartment.id}`} style={{ textDecoration: 'none' }}>
+    <Link href={`/units/${apartment.id}`} style={{ textDecoration: 'none' }}>
       <Card 
         sx={{ 
           height: '100%',

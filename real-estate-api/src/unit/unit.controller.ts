@@ -19,14 +19,25 @@ export class UnitController {
     @Query('minBedrooms', new ParseIntPipe({ optional: true })) minBedrooms?: number,
     @Query('maxBedrooms', new ParseIntPipe({ optional: true })) maxBedrooms?: number,
     @Query('furnished', new ParseBoolPipe({ optional: true })) furnished?: boolean,
+    @Query('projectSearch') projectSearch?: string,
+    @Query('developerSearch') developerSearch?: string,
+    @Query('search') search?: string,
+    @Query('unitName') unitName?: string,
+    @Query('unitCode') unitCode?: string,
   ) {
-    if (minPrice || maxPrice || minBedrooms || maxBedrooms || furnished !== undefined) {
+    if (minPrice || maxPrice || minBedrooms || maxBedrooms || furnished !== undefined || 
+        projectSearch || developerSearch || search || unitName || unitCode) {
       return this.unitService.findByFilters({
         minPrice,
         maxPrice,
         minBedrooms,
         maxBedrooms,
         furnished,
+        projectSearch,
+        developerSearch,
+        search,
+        unitName,
+        unitCode,
       });
     }
     return this.unitService.findAll();

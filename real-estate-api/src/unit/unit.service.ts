@@ -84,10 +84,49 @@ export class UnitService {
     minBedrooms?: number;
     maxBedrooms?: number;
     furnished?: boolean;
+    projectSearch?: string;
+    developerSearch?: string;
+    search?: string;
+    unitName?: string;
+    unitCode?: string;
   }) {
     const query = this.unitRepo.createQueryBuilder('unit')
       .leftJoinAndSelect('unit.project', 'project')
       .leftJoinAndSelect('project.developer', 'developer');
+
+    // Specific unit name search
+    if (filters.unitName) {
+      query.andWhere('unit.name ILIKE :unitName', { unitName: `%${filters.unitName}%` });
+    }
+
+    // Specific unit code search
+    if (filters.unitCode) {
+      query.andWhere('unit.code ILIKE :unitCode', { unitCode: `%${filters.unitCode}%` });
+    }
+
+    // General search across unit properties
+    if (filters.search) {
+      query.andWhere(
+        '(unit.name ILIKE :search OR unit.description ILIKE :search OR unit.location ILIKE :search OR unit.code ILIKE :search)',
+        { search: `%${filters.search}%` }
+      );
+    }
+
+    // Project search
+    if (filters.projectSearch) {
+      query.andWhere(
+        '(project.name ILIKE :projectSearch OR project.description ILIKE :projectSearch)',
+        { projectSearch: `%${filters.projectSearch}%` }
+      );
+    }
+
+    // Developer search
+    if (filters.developerSearch) {
+      query.andWhere(
+        '(developer.name ILIKE :developerSearch OR developer.description ILIKE :developerSearch)',
+        { developerSearch: `%${filters.developerSearch}%` }
+      );
+    }
 
     if (filters.minPrice) {
       query.andWhere('unit.price >= :minPrice', { minPrice: filters.minPrice });
@@ -108,6 +147,9 @@ export class UnitService {
     if (filters.furnished !== undefined) {
       query.andWhere('unit.furnished = :furnished', { furnished: filters.furnished });
     }
+
+    // Add ordering
+    query.orderBy('unit.created_at', 'DESC');
 
     return query.getMany();
   }

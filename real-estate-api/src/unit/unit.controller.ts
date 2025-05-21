@@ -13,7 +13,22 @@ export class UnitController {
   }
 
   @Get()
-  findAll() {
+  findAll(
+    @Query('minPrice', new ParseIntPipe({ optional: true })) minPrice?: number,
+    @Query('maxPrice', new ParseIntPipe({ optional: true })) maxPrice?: number,
+    @Query('minBedrooms', new ParseIntPipe({ optional: true })) minBedrooms?: number,
+    @Query('maxBedrooms', new ParseIntPipe({ optional: true })) maxBedrooms?: number,
+    @Query('furnished', new ParseBoolPipe({ optional: true })) furnished?: boolean,
+  ) {
+    if (minPrice || maxPrice || minBedrooms || maxBedrooms || furnished !== undefined) {
+      return this.unitService.findByFilters({
+        minPrice,
+        maxPrice,
+        minBedrooms,
+        maxBedrooms,
+        furnished,
+      });
+    }
     return this.unitService.findAll();
   }
 

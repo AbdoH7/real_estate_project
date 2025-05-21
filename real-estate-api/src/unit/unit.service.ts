@@ -78,5 +78,37 @@ export class UnitService {
     return this.unitRepo.remove(unit);
   }
 
-  
+  async findByFilters(filters: {
+    minPrice?: number;
+    maxPrice?: number;
+    minBedrooms?: number;
+    maxBedrooms?: number;
+    furnished?: boolean;
+  }) {
+    const query = this.unitRepo.createQueryBuilder('unit')
+      .leftJoinAndSelect('unit.project', 'project')
+      .leftJoinAndSelect('project.developer', 'developer');
+
+    if (filters.minPrice) {
+      query.andWhere('unit.price >= :minPrice', { minPrice: filters.minPrice });
+    }
+
+    if (filters.maxPrice) {
+      query.andWhere('unit.price <= :maxPrice', { maxPrice: filters.maxPrice });
+    }
+
+    if (filters.minBedrooms) {
+      query.andWhere('unit.bedroom_count >= :minBedrooms', { minBedrooms: filters.minBedrooms });
+    }
+
+    if (filters.maxBedrooms) {
+      query.andWhere('unit.bedroom_count <= :maxBedrooms', { maxBedrooms: filters.maxBedrooms });
+    }
+
+    if (filters.furnished !== undefined) {
+      query.andWhere('unit.furnished = :furnished', { furnished: filters.furnished });
+    }
+
+    return query.getMany();
+  }
 } 

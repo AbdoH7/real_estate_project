@@ -11,7 +11,7 @@ services:
     ports:
       - "${API_PORT}:3000"
     volumes:
-      - ./real-estate-api:/home/node/app
+      - ./real-estate-api:/home/realestate-user/real-estate-api
       - /home/node/app/node_modules
     environment:
       NODE_ENV: ${NODE_ENV}

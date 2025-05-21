@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Developer } from './entities/developer.entity';
@@ -21,16 +21,22 @@ export class DeveloperService {
     return this.repo.find();
   }
 
-  findOne(id: string) {
-    return this.repo.findOneBy({ id });
+  async findOne(id: string) {
+    const developer = await this.repo.findOneBy({ id });
+    if (!developer) {
+      throw new NotFoundException(`Developer with ID "${id}" not found`);
+    }
+    return developer;
   }
 
   async update(id: string, dto: UpdateDeveloperDto) {
+    const developer = await this.findOne(id);
     await this.repo.update(id, dto);
     return this.findOne(id);
   }
 
-  remove(id: string) {
+  async remove(id: string) {
+    const developer = await this.findOne(id);
     return this.repo.delete(id);
   }
 

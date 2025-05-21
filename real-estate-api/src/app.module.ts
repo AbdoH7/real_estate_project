@@ -7,6 +7,7 @@ import typeorm from './config/typeorm'
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DeveloperModule } from './developer/developer.module';
 import { ProjectModule } from './project/project.module';
+import { UnitModule } from './unit/unit.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ProjectModule } from './project/project.module';
   }),
     DeveloperModule,
     ProjectModule,
+    UnitModule,
   ],
   controllers: [AppController],
   providers: [AppService],

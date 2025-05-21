@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, } from 'typeorm';
 import { Developer } from '../../developer/entities/developer.entity';
+import { Unit } from '../../unit/entities/unit.entity';
 
 @Entity()
 export class Project {
@@ -17,4 +18,7 @@ export class Project {
 
   @ManyToOne(() => Developer, (developer) => developer.projects, { onDelete: 'CASCADE' })
   developer: Developer;
+
+  @OneToMany(() => Unit, unit => unit.project)
+  units: Unit[];
 }

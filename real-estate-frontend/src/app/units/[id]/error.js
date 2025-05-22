@@ -29,7 +29,7 @@ export default function Error({ error }) {
         >
           <ErrorOutlineIcon color="error" sx={{ fontSize: 64 }} />
           <Typography variant="h5" gutterBottom>
-            {error?.message || 'Failed to load unit details'}
+            {'Failed to load unit details'}
           </Typography>
           <Typography variant="body1" color="text.secondary" gutterBottom>
             We encountered an error while trying to load this unit. Please try again later.

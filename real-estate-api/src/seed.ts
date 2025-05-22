@@ -23,7 +23,7 @@ async function seed() {
         website: 'https://talaatmoustafa.com/',
       },
       {
-        name: 'SODIC ',
+        name: 'SODIC',
         description: 'High-rise A distinguished 25-year track record. SODIC is a leading developer on the outskirts of Greater Cairo and the North Coast, with a distinguished 25-year track record of developing exceptional residential, commercial, and retail projects.',
         website: 'https://developments.sodic.com/',
       },
@@ -84,6 +84,7 @@ async function seed() {
         bedroom_count: 5,
         bathroom_count: 6,
         furnished: false,
+        main_image_url: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070',
         project: madinaty,
       },
       {
@@ -97,6 +98,7 @@ async function seed() {
         bedroom_count: 3,
         bathroom_count: 3,
         furnished: true,
+        main_image_url: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070',
         project: madinaty,
       },
       {
@@ -110,6 +112,7 @@ async function seed() {
         bedroom_count: 4,
         bathroom_count: 4,
         furnished: false,
+        main_image_url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075',
         project: alRehab,
       },
       {
@@ -123,6 +126,7 @@ async function seed() {
         bedroom_count: 0,
         bathroom_count: 1,
         furnished: true,
+        main_image_url: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080',
         project: alRehab,
       },
       {
@@ -136,6 +140,7 @@ async function seed() {
         bedroom_count: 4,
         bathroom_count: 5,
         furnished: true,
+        main_image_url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053',
         project: vye,
       },
       {
@@ -149,6 +154,7 @@ async function seed() {
         bedroom_count: 3,
         bathroom_count: 3,
         furnished: false,
+        main_image_url: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=2070',
         project: vye,
       },
     ]);

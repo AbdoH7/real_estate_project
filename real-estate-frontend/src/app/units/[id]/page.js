@@ -33,11 +33,11 @@ export default async function UnitDetails({ params }) {
             <Grid item xs={12} md={6}>
               <Box
                 component="img"
-                src={unit.image || 'https://placehold.co/800x600'}
+                src={unit.main_image_url || 'https://placehold.co/800x600'}
                 alt={unit.name}
                 sx={{
                   width: '100%',
-                  height: 400,
+                  height: '400px',
                   objectFit: 'cover',
                   borderRadius: 2,
                 }}

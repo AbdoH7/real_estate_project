@@ -36,6 +36,9 @@ export class Unit {
   @Column({ default: false })
   furnished: boolean;
 
+  @Column({ type: 'text', nullable: true })
+  main_image_url: string;
+
   @ManyToOne(() => Project, project => project.units, { nullable: true })
   project: Project;
 

@@ -34,6 +34,7 @@ export default function AddUnitForm() {
     bedroom_count: '',
     bathroom_count: '',
     furnished: false,
+    main_image_url: '',
   });
 
   // Fetch projects on component mount
@@ -266,6 +267,17 @@ export default function AddUnitForm() {
                 />
               }
               label="Furnished"
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Main Image URL"
+              name="main_image_url"
+              value={formData.main_image_url}
+              onChange={handleInputChange}
+              helperText="Enter the URL of the main image for this unit"
             />
           </Grid>
 

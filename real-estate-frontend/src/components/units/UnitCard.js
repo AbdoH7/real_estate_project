@@ -35,10 +35,12 @@ export default function UnitCard({ unit }) {
         <CardMedia
           component="img"
           height="200"
-          image={unit.image || 'https://placehold.co/600x400'}
+          image={unit.main_image_url || 'https://placehold.co/800x600'}
           alt={unit.name}
           sx={{
             objectFit: 'cover',
+            height: '200px',
+            width: '100%',
           }}
         />
         <CardContent sx={{ flexGrow: 1 }}>

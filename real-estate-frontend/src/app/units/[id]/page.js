@@ -7,12 +7,16 @@ import {
   Chip,
   Divider,
   Stack,
+  Card,
+  CardContent,
 } from '@mui/material';
 import BedIcon from '@mui/icons-material/Bed';
 import BathtubIcon from '@mui/icons-material/Bathtub';
 import SquareFootIcon from '@mui/icons-material/SquareFoot';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import BusinessIcon from '@mui/icons-material/Business';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 import { getUnit } from '@/lib/api/units';
 
 export default async function UnitDetails({ params }) {
@@ -99,6 +103,61 @@ export default async function UnitDetails({ params }) {
           </Grid>
 
           <Divider sx={{ my: 4 }} />
+
+          {/* Project and Developer Section */}
+          {(unit.project || unit.project?.developer) && (
+            <>
+              <Box sx={{ mb: 4 }}>
+                <Typography variant="h5" gutterBottom>
+                  Project Details
+                </Typography>
+                <Grid container spacing={3}>
+                  {unit.project && (
+                    <Grid item xs={12} md={6}>
+                      <Card variant="outlined">
+                        <CardContent>
+                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                            <ApartmentIcon color="primary" />
+                            <Typography variant="h6">Project Information</Typography>
+                          </Box>
+                          <Typography variant="body1" gutterBottom>
+                            <strong>Name:</strong> {unit.project.name}
+                          </Typography>
+                          {unit.project.description && (
+                            <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                              {unit.project.description}
+                            </Typography>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  )}
+                  
+                  {unit.project?.developer && (
+                    <Grid item xs={12} md={6}>
+                      <Card variant="outlined">
+                        <CardContent>
+                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                            <BusinessIcon color="primary" />
+                            <Typography variant="h6">Developer Information</Typography>
+                          </Box>
+                          <Typography variant="body1" gutterBottom>
+                            <strong>Name:</strong> {unit.project.developer.name}
+                          </Typography>
+                          {unit.project.developer.description && (
+                            <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                              {unit.project.developer.description}
+                            </Typography>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  )}
+                </Grid>
+              </Box>
+              <Divider sx={{ my: 4 }} />
+            </>
+          )}
 
           {/* Description Section */}
           <Box sx={{ mb: 4 }}>

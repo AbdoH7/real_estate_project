@@ -12,6 +12,11 @@ export class UnitController {
     return this.unitService.create(createUnitDto);
   }
 
+  @Get('max-values')
+  getMaxValues() {
+    return this.unitService.getMaxValues();
+  }
+
   @Get()
   findAll(
     @Query('minPrice', new ParseIntPipe({ optional: true })) minPrice?: number,

@@ -25,6 +25,19 @@ export class UnitService {
     return this.unitRepo.save(unit);
   }
 
+  async getMaxValues() {
+    const result = await this.unitRepo
+      .createQueryBuilder('unit')
+      .select('MAX(unit.price)', 'maxPrice')
+      .addSelect('MAX(unit.bedroom_count)', 'maxBedrooms')
+      .getRawOne();
+
+    return {
+      maxPrice: Number(result.maxPrice) || 1000000, // Default if no units exist
+      maxBedrooms: Number(result.maxBedrooms) || 10, // Default if no units exist
+    };
+  }
+
   async findAll() {
     return this.unitRepo.find({
       relations: ['project', 'project.developer'],
@@ -107,7 +120,7 @@ export class UnitService {
     // General search across unit properties
     if (filters.search) {
       query.andWhere(
-        '(unit.name ILIKE :search OR unit.description ILIKE :search OR unit.location ILIKE :search OR unit.code ILIKE :search)',
+        '(unit.name ILIKE :search OR unit.description ILIKE :search OR unit.location ILIKE :search OR unit.code ILIKE :search OR developer.name ILIKE :search OR project.name ILIKE :search)',
         { search: `%${filters.search}%` }
       );
     }

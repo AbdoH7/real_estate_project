@@ -8,10 +8,13 @@ import {
   Box,
   Chip,
   Stack,
+  Divider,
 } from '@mui/material';
 import BedIcon from '@mui/icons-material/Bed';
 import BathtubIcon from '@mui/icons-material/Bathtub';
 import SquareFootIcon from '@mui/icons-material/SquareFoot';
+import BusinessIcon from '@mui/icons-material/Business';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 import Link from 'next/link';
 
 export default function UnitCard({ unit }) {
@@ -90,15 +93,39 @@ export default function UnitCard({ unit }) {
             </Box>
           </Stack>
 
-          {unit.furnished && (
-            <Box sx={{ mt: 2 }}>
+          <Box sx={{ mt: 2, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+            {unit.furnished && (
               <Chip 
                 label="Furnished" 
                 size="small" 
                 color="primary" 
                 sx={{ borderRadius: 1 }}
               />
-            </Box>
+            )}
+          </Box>
+
+          {(unit.project || unit.project?.developer) && (
+            <>
+              <Divider sx={{ my: 2 }} />
+              
+              {unit.project && (
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <ApartmentIcon fontSize="small" color="action" />
+                  <Typography variant="body2" color="text.secondary" noWrap>
+                    Project: {unit.project.name}
+                  </Typography>
+                </Box>
+              )}
+              
+              {unit.project?.developer && (
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <BusinessIcon fontSize="small" color="action" />
+                  <Typography variant="body2" color="text.secondary" noWrap>
+                    Developer: {unit.project.developer.name}
+                  </Typography>
+                </Box>
+              )}
+            </>
           )}
         </CardContent>
       </Card>

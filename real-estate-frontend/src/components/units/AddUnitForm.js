@@ -158,18 +158,6 @@ export default function AddUnitForm() {
 
           <Grid item xs={12}>
             <TextField
-              fullWidth
-              label="Description"
-              name="description"
-              multiline
-              rows={4}
-              value={formData.description}
-              onChange={handleInputChange}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField
               required
               fullWidth
               label="Location"
@@ -277,7 +265,6 @@ export default function AddUnitForm() {
               name="main_image_url"
               value={formData.main_image_url}
               onChange={handleInputChange}
-              helperText="Enter the URL of the main image for this unit"
             />
           </Grid>
 
@@ -320,6 +307,19 @@ export default function AddUnitForm() {
           </Grid>
 
           <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Description"
+              name="description"
+              multiline
+              rows={4}
+              value={formData.description}
+              onChange={handleInputChange}
+            />
+          </Grid>
+
+        </Grid>
+          <Grid item xs={12}>
             <Button
               type="submit"
               variant="contained"
@@ -330,7 +330,6 @@ export default function AddUnitForm() {
               {loading ? 'Creating...' : 'Create Unit'}
             </Button>
           </Grid>
-        </Grid>
       </form>
     </Paper>
   );

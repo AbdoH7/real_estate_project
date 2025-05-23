@@ -47,10 +47,11 @@ services:
     container_name: real-estate-frontend
     ports:
       - "3001:3000"
-    volumes:
-      - ./real-estate-frontend:/app
-      - /app/node_modules
-      - /app/.next
+    
+    # volumes: # For development mode
+    #   - ./real-estate-frontend:/app
+    #   - /app/node_modules
+    #   - /app/.next
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     env_file:

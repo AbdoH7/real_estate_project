@@ -59,3 +59,5 @@ The application will be available at:
 - [ ] Add image carousel for each listing so that each listing can have an image gallery rather than one image
 - [ ] Add add project, and add developer functionality
 - [ ] Add unit tests
+- [ ] Enhance UI
+- [ ] Re-Iterate over the Frontend app file structure

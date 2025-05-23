@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Unit } from './entities/unit.entity';
@@ -15,6 +15,14 @@ export class UnitService {
   ) {}
 
   async create(createUnitDto: CreateUnitDto) {
+    const existingUnit = await this.unitRepo.findOne({
+      where: { code: createUnitDto.code }
+    });
+
+    if (existingUnit) {
+      throw new ConflictException(`Unit with code "${createUnitDto.code}" already exists`);
+    }
+
     const unit = this.unitRepo.create(createUnitDto);
     
     if (createUnitDto.projectId) {

@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { connectionSource } from './config/typeorm';
 import { seed } from './seed';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+// import { UniqueConstraintFilter } from './filters/unique-constraint.filter';
+
 
 async function bootstrap() {
   await connectionSource.initialize();
@@ -32,6 +34,8 @@ async function bootstrap() {
   
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
+  //  app.useGlobalFilters(new UniqueConstraintFilter());
 
   await app.listen(process.env.PORT ?? 3000);
 }

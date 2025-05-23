@@ -1,4 +1,5 @@
-const API_URL = 'http://api:3000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+const FORM_SUBMISSION_URL = process.env.NEXT_BROWSER_PUBLIC_API_URL || "http://localhost:3000"
 
 const defaultHeaders = {
   'Accept': 'application/json',
@@ -39,7 +40,7 @@ export async function getUnit(id) {
 
 export async function createUnit(unitData) {
   try {
-    const response = await fetch(`http://localhost:3000/units`, {
+    const response = await fetch(`${FORM_SUBMISSION_URL}/units`, {
       method: 'POST',
       headers: defaultHeaders,
       body: JSON.stringify(unitData),

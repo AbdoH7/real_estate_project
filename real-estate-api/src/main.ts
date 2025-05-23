@@ -13,6 +13,15 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
+  // Enable CORS in development mode
+  if (process.env.NODE_ENV !== 'production') {
+    app.enableCors({
+      origin: '*',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      credentials: true,
+    });
+  }
+
   // Swagger configuration
   const config = new DocumentBuilder()
     .setTitle('Real Estate API')

@@ -1,8 +1,8 @@
-const API_URL = 'http://api:3000';
+const API_URL = process.env.NEXT_BROWSER_PUBLIC_API_URL || "http://localhost:3000"
 
 export async function getProjects() {
   try {
-    const response = await fetch(`http://localhost:3000/projects`, {
+    const response = await fetch(`${API_URL}/projects`, {
       cache: 'no-store',
       headers: {
         'Accept': 'application/json',

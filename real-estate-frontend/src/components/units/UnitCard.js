@@ -22,37 +22,50 @@ export default function UnitCard({ unit }) {
     <Link href={`/units/${unit.id}`} style={{ textDecoration: 'none' }}>
       <Card 
         sx={{ 
-          height: '100%',
+          width: '100%',
+          height: 480, // Fixed height
           display: 'flex',
           flexDirection: 'column',
           transition: 'transform 0.2s ease-in-out',
           '&:hover': {
             transform: 'translateY(-4px)',
             boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-          }
+          },
         }}
       >
-        <CardMedia
-          component="img"
-          height="200"
-          image={unit.main_image_url || 'https://placehold.co/800x600'}
-          alt={unit.name}
-          sx={{
-            objectFit: 'cover',
-            height: '200px',
-            width: '100%',
-          }}
-        />
-        <CardContent sx={{ flexGrow: 1 }}>
-          <Typography variant="h6" gutterBottom noWrap>
+        <Box sx={{ height: 220 }}> {/* Fixed height for image container */}
+          <CardMedia
+            component="img"
+            image={unit.main_image_url || 'https://placehold.co/800x600'}
+            alt={unit.name}
+            sx={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        </Box>
+        <CardContent sx={{ 
+          flexGrow: 1, 
+          display: 'flex', 
+          flexDirection: 'column',
+          p: 2,
+          '&:last-child': { pb: 2 }, // Override MUI's default padding
+        }}>
+          <Typography variant="h6" sx={{ 
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            mb: 1,
+            fontSize: '1.1rem',
+          }}>
             {unit.name}
           </Typography>
           
           <Typography 
             variant="subtitle1" 
             color="primary.main" 
-            gutterBottom 
-            sx={{ fontWeight: 'bold' }}
+            sx={{ fontWeight: 'bold', mb: 1 }}
           >
             ${unit.price.toLocaleString()}
           </Typography>
@@ -60,13 +73,11 @@ export default function UnitCard({ unit }) {
           <Typography 
             variant="body2" 
             color="text.secondary" 
-            gutterBottom 
             sx={{ 
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
+              mb: 2,
               overflow: 'hidden',
-              mb: 2
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
             }}
           >
             {unit.location}
@@ -76,9 +87,9 @@ export default function UnitCard({ unit }) {
             direction="row" 
             spacing={2} 
             sx={{ 
-              mt: 'auto',
               justifyContent: 'space-between',
-              alignItems: 'center'
+              alignItems: 'center',
+              mb: 1
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
@@ -95,40 +106,40 @@ export default function UnitCard({ unit }) {
             </Box>
           </Stack>
 
-          <Box sx={{ mt: 2, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          <Box sx={{ mt: 'auto' }}>
             {unit.furnished && (
               <Chip 
                 label="Furnished" 
                 size="small" 
                 color="primary" 
-                sx={{ borderRadius: 1 }}
+                sx={{ borderRadius: 1, mb: 1 }}
               />
             )}
-          </Box>
 
-          {(unit.project || unit.project?.developer) && (
-            <>
-              <Divider sx={{ my: 2 }} />
-              
-              {unit.project && (
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                  <ApartmentIcon fontSize="small" color="action" />
-                  <Typography variant="body2" color="text.secondary" noWrap>
-                    Project: {unit.project.name}
-                  </Typography>
-                </Box>
-              )}
-              
-              {unit.project?.developer && (
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <BusinessIcon fontSize="small" color="action" />
-                  <Typography variant="body2" color="text.secondary" noWrap>
-                    Developer: {unit.project.developer.name}
-                  </Typography>
-                </Box>
-              )}
-            </>
-          )}
+            {(unit.project || unit.project?.developer) && (
+              <>
+                <Divider sx={{ mb: 1 }} />
+                
+                {unit.project && (
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <ApartmentIcon fontSize="small" color="action" />
+                    <Typography variant="body2" color="text.secondary" noWrap>
+                      {unit.project.name}
+                    </Typography>
+                  </Box>
+                )}
+                
+                {unit.project?.developer && (
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 0.5 }}>
+                    <BusinessIcon fontSize="small" color="action" />
+                    <Typography variant="body2" color="text.secondary" noWrap>
+                      {unit.project.developer.name}
+                    </Typography>
+                  </Box>
+                )}
+              </>
+            )}
+          </Box>
         </CardContent>
       </Card>
     </Link>

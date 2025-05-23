@@ -48,6 +48,14 @@ export default async function UnitDetails({ params }) {
                 {unit.name}
               </Typography>
               
+              <Typography 
+                variant="subtitle1" 
+                color="text.secondary" 
+                sx={{ mb: 2 }}
+              >
+                Code: {unit.code}
+              </Typography>
+              
               <Typography variant="h5" color="primary" gutterBottom sx={{ fontWeight: 'bold' }}>
                 ${unit.price.toLocaleString()}
               </Typography>

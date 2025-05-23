@@ -2,7 +2,7 @@ import { Container, Button, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
 import { getUnits } from '@/lib/api/units';
-import { SearchContainer } from '../components/search/SearchContainer';
+import { UnitsContainer } from '../components/units/UnitsContainer';
 
 export default async function HomePage() {
   const units = await getUnits();
@@ -18,7 +18,7 @@ export default async function HomePage() {
           </Link>
         </Box>
         
-        <SearchContainer initialUnits={units} />
+        <UnitsContainer initialUnits={units} />
       </Container>
     </main>
   );

@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Container, CircularProgress } from '@mui/material';
-import { SearchBar } from './SearchBar';
-import { FilterBar } from './FilterBar';
+import { SearchBar } from '../search/SearchBar';
+import { FilterBar } from '../search/FilterBar';
 import { useSearch } from '../../lib/hooks/useSearch';
 import { getMaxValues } from '../../lib/services/searchService';
-import UnitsList from '../units/UnitsList';
+import UnitsList from './UnitsList';
 
-export const SearchContainer = ({ initialUnits }) => {
+export const UnitsContainer = ({ initialUnits }) => {
   const [maxValues, setMaxValues] = useState(null);
   const [isLoadingMaxValues, setIsLoadingMaxValues] = useState(true);
 

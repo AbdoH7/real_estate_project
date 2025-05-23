@@ -1,8 +1,10 @@
 import { IsString, IsNumber, IsArray, IsBoolean, IsOptional, IsUUID, Min, IsNotEmpty } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class CreateUnitDto {
   @IsString()
   @IsNotEmpty()
+  @Transform(({ value }) => value.trim())
   code: string;
 
   @IsString()
@@ -43,4 +45,8 @@ export class CreateUnitDto {
   @IsUUID()
   @IsOptional()
   projectId?: string;
+
+  @IsString()
+  @IsOptional()
+  main_image_url?: string;
 } 

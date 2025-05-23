@@ -6,7 +6,7 @@ export class Unit {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   code: string;
 
   @Column()
